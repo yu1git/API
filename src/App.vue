@@ -1,26 +1,33 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app" class="mx-auto mt-4" style="width: 400px">
+    <h1>楽天APIで書籍を検索</h1>
+    <Find v-on:find-event="find_event" />
+    <div style="margin-top:20px">
+      <Book v-bind:result_word="result" />
+    </div>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Book from './components/Book.vue'
+import Find from './components/Find.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+    Book,
+    Find
+  },
+  data(){
+    return{
+      result:""
+    }
+  },
+  methods: {
+    find_event(find_word){
+      this.result = find_word;
+    }
+  },
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
